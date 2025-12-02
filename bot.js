@@ -1,5 +1,5 @@
 const { Telegraf = require('telegraf');
-const bot = new Telegraf("YOUR_BOT_TOKEN_HERE"); // هتحط توكن البوت هنا
+const bot = new Telegraf("7702526451:AAEM9dE_7uIdKhx3ZE6T0XxITwb8Wc4f1ek"); // هتحط توكن البوت هنا
 
 let pendingVideo = null;
 
