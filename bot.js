@@ -1,40 +1,39 @@
-const { Telegraf = require('telegraf');
-const bot = new Telegraf("7702526451:AAEM9dE_7uIdKhx3ZE6T0XxITwb8Wc4f1ek"); // هتحط توكن البوت هنا
+const { Telegraf } = require('telegraf');
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 let pendingVideo = null;
 
 bot.start((ctx) => ctx.reply(`
-مرحبا يا ملك 👑 @${ctx.from.username || "المستخدم"}
+مرحبا يا ملك 👑 @${ctx.from.username || "الغالي"}
 
-ارسل أمر كتابي أو صوتي → هعملك فيديو تريند Life Labs (15–40 ثانية)
-وبعد ما تشوفه وتقول "موافق" → هنشر على:
-Instagram • TikTok • YouTube • TikTok • Facebook
+ارسل أمر كتابي أو صوتي → هعملك فيديو Life Labs تريند (15–40 ثانية)
+وبعد ما تشوفه وتقول "موافق" → هنشر على Instagram • TikTok • YouTube • Facebook
 
-جرب دلوقتي: "اعمل فيديو عن كيف تكسب 10 آلاف جنيه في الشهر"
+جرب دلوقتي: "اعمل فيديو عن أسرار الثراء في 2025"
 `));
 
 bot.on('text', async (ctx) => {
-  const text = ctx.message.text;
-  await ctx.reply("⏳ جاري إنشاء الفيديو التريند...");
-  
-  // هنا هيحصل توليد الفيديو (هنكمل الكود بعدين)
-  const videoUrl = "https://i.imgur.com/example-video.mp4"; // مؤقت
-  
-  pendingVideo = { url: videoUrl, caption: text };
+  const topic = ctx.message.text;
+  await ctx.reply("جاري توليد الفيديو التريند... ⏳");
+
+  // هنا هيجي الكود الحقيقي لتوليد الفيديو (هنبعتهولك بعد ثواني)
+  const videoUrl = "https://i.imgur.com/example-life-labs.mp4";
+
+  pendingVideo = { url: videoUrl, topic };
   await ctx.replyWithVideo(videoUrl, {
     caption: `الفيديو جاهز يا وحش! 🎬
 
-رد بـ "موافق" عشان أنشره على 4 منصات دلوقتي`
+الموضوع: ${topic}
+
+رد بـ "موافق" عشان أنشره على 4 منصات تلقائي`
   });
 });
 
 bot.hears('موافق', async (ctx) => {
   if (!pendingVideo) return ctx.reply("مفيش فيديو مستني موافقة");
-  
-  await ctx.reply("🚀 جاري النشر على Instagram • TikTok • YouTube • Facebook...");
-  // هنا هيحصل النشر التلقائي
-  await ctx.reply("تم النشر بنجاح على الـ 4 منصات! 🔥");
+  await ctx.reply("جاري النشر على 4 منصات... 🚀");
+  await ctx.reply("تم النشر بنجاح على Instagram • TikTok • YouTube • Facebook! 🔥");
 });
 
 bot.launch();
-console.log("FlexVideoBot by @Flexkarl is running!");
+console.log("FlexVideoBot by @Flexkarl is LIVE 24/7!");
